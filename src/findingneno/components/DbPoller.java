@@ -1,9 +1,9 @@
-package finding_neno;
+package findingneno.components;
 
 import Prism.core.AbstractImplementation;
 import Prism.core.Event;
 
-public class FailedJobQueue extends AbstractImplementation {
+public class DbPoller extends AbstractImplementation {
 
     @Override
     public void handle(Event event) {

@@ -1,9 +1,9 @@
-package finding_neno;
+package findingneno.components;
 
 import Prism.core.AbstractImplementation;
 import Prism.core.Event;
 
-public class JobScheduler extends AbstractImplementation {
+public class JobWorkflowInitiator extends AbstractImplementation {
 
     @Override
     public void handle(Event event) {

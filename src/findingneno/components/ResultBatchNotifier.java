@@ -1,9 +1,9 @@
-package finding_neno;
+package findingneno.components;
 
 import Prism.core.AbstractImplementation;
 import Prism.core.Event;
 
-public class DbPoller extends AbstractImplementation {
+public class ResultBatchNotifier extends AbstractImplementation {
 
     @Override
     public void handle(Event event) {
