@@ -7,4 +7,13 @@ public class Configuration {
 	public static final int DISPATCHER_THREAD_COUNT = 10;
     }
 
+    public static class DbPollerConfiguration {
+	public static final int THREADPOOL_SIZE = 1;
+	public static final long THREADPOOL_TERMINATION_TIMEOUT_MILLISECONDS = 1000L;
+	public static final long THREADPOOL_SCHEDULE_DELAY_SECONDS = 5L;
+	public static final String POSTGRES_URL = "jdbc:postgresql://localhost:5432/findingneno_db";
+	public static final String POSTGRES_USER = "rick";
+	public static final String POSTGRES_PASSWORD = "morty";
+    }
+
 }

@@ -1,6 +1,6 @@
 package findingneno.components;
 
-public class Constants {
+public class ComponentConstants {
     public static class ComponentNames {
 	public static final String DB_POLLER = "Database Poller";
 	public static final String FAILED_JOB_QUEUE = "Failed Job Queue";
@@ -16,4 +16,18 @@ public class Constants {
 	public static final String QUEUES_TO_WORKFLOW_INITIATOR = "Queues to Workflow Initiators";
 	public static final String WORKFLOW_INTIATOR_TO_BATCH_NOTIFIER = "Workflow Initiator to Batch Notifier";
     }
+
+    public static class DbPollerConstants {
+	public static final String QUERY_STRING = "SELECT * FROM SUBSCRIPTIONS";
+	public static final String ID_FIELD = "id";
+	public static final String URL_FIELD = "url";
+	public static final String TAG_FIELD = "tag";
+	public static final String TAG_VALUE_FIELD = "tag_value";
+    }
+
+    public static class EventConstants {
+	public static final String JOB_PARAMETER = "Job";
+	public static final String EVENT_GOT_NEW_JOB = "Got new Job";
+    }
+
 }

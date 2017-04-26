@@ -1,5 +1,9 @@
 package findingneno;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import Prism.core.FIFOScheduler;
 import Prism.core.PrismConstants;
 import Prism.core.RRobinDispatcher;
@@ -8,24 +12,41 @@ import Prism.extensions.architecture.ExtensibleArchitecture;
 import Prism.extensions.component.ExtensibleComponent;
 import Prism.extensions.connector.ExtensibleConnector;
 import Prism.style.StyleFactory;
-import findingneno.components.Constants.ComponentNames;
-import findingneno.components.Constants.ConnectorNames;
+import findingneno.components.ComponentConstants.ComponentNames;
+import findingneno.components.ComponentConstants.ConnectorNames;
 import findingneno.components.DbPoller;
 import findingneno.components.FailedJobQueue;
 import findingneno.components.JobScheduler;
 import findingneno.components.JobWorkflowInitiator;
 import findingneno.components.OpenJobQueue;
 import findingneno.components.ResultBatchNotifier;
+import findingneno.configuration.Configuration;
 import findingneno.configuration.Configuration.Constants;
 
 public class FindingNeno {
 
+    private static Connection makeDbConnection() {
+	Connection connection = null;
+	try {
+	    Class.forName("org.postgresql.Driver");
+	    connection = DriverManager.getConnection(Configuration.DbPollerConfiguration.POSTGRES_URL,
+		    Configuration.DbPollerConfiguration.POSTGRES_USER,
+		    Configuration.DbPollerConfiguration.POSTGRES_PASSWORD);
+	} catch (ClassNotFoundException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} catch (SQLException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	return connection;
+    }
+
     public static ExtensibleArchitecture makeArchitecture(Scaffold scaffold) {
 	ExtensibleArchitecture extensibleArchitecture = StyleFactory.generateArchitecture(Constants.ARCHITECTURE_NAME,
 		PrismConstants.C2_ARCH);
-
 	ExtensibleComponent dbPollerComponent = StyleFactory.generateComponent(ComponentNames.DB_POLLER,
-		PrismConstants.C2_COMP, new DbPoller());
+		PrismConstants.C2_COMP, new DbPoller(makeDbConnection()));
 	ExtensibleComponent failedJobQueueComponent = StyleFactory.generateComponent(ComponentNames.FAILED_JOB_QUEUE,
 		PrismConstants.C2_COMP, new FailedJobQueue());
 	ExtensibleComponent jobSchedulerComponent = StyleFactory.generateComponent(ComponentNames.JOB_SCHEDULER,
