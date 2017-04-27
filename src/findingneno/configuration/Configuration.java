@@ -16,4 +16,8 @@ public class Configuration {
 	public static final String POSTGRES_PASSWORD = "morty";
     }
 
+    public static class OpenQueueConfiguration {
+	public static final int MAX_QUEUE_SIZE = 1;
+    }
+
 }

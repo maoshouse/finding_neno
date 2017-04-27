@@ -28,7 +28,8 @@ public class ComponentConstants {
     public static class EventConstants {
 	public static final String JOB_PARAMETER = "Job";
 	public static final String EVENT_GOT_NEW_JOB = "Got new Job";
-	public static final String EVENT_SCHEDULE_NEW_JOB = "Schedule new Job";
+	public static final String EVENT_REQUEST_SCHEDULE_NEW_JOB = "Schedule new Job";
+	public static final String EVENT_REQUEST_WORKFLOW = "Request a new Workflow";
     }
 
 }

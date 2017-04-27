@@ -26,7 +26,7 @@ public class JobScheduler extends AbstractImplementation {
 	} else if (event.eventType == PrismConstants.REQUEST) {
 	    // this was a request from a lower layer
 	    Job job = (Job) event.getParameter(EventConstants.JOB_PARAMETER);
-	    Event requestEvent = new Event(EventConstants.EVENT_SCHEDULE_NEW_JOB);
+	    Event requestEvent = new Event(EventConstants.EVENT_REQUEST_SCHEDULE_NEW_JOB);
 	    event.addParameter(EventConstants.JOB_PARAMETER, job);
 	    send(requestEvent);
 	}
