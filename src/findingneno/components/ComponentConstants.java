@@ -19,6 +19,7 @@ public class ComponentConstants {
 
     public static class DbPollerConstants {
 	public static final String QUERY_STRING = "SELECT * FROM SUBSCRIPTIONS";
+	public static final String CLASS_FIELD = "class";
 	public static final String ID_FIELD = "id";
 	public static final String URL_FIELD = "url";
 	public static final String TAG_FIELD = "tag";
@@ -27,9 +28,11 @@ public class ComponentConstants {
 
     public static class EventConstants {
 	public static final String JOB_PARAMETER = "Job";
+	public static final String NEW_VALUE_PARAMETER = "New Value";
 	public static final String EVENT_GOT_NEW_JOB = "Got new Job";
 	public static final String EVENT_REQUEST_SCHEDULE_NEW_JOB = "Schedule new Job";
 	public static final String EVENT_REQUEST_WORKFLOW = "Request a new Workflow";
+	public static final String EVENT_VALUE_CHANGED = "Value changed";
     }
 
 }

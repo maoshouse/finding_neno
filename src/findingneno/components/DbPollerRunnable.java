@@ -26,11 +26,12 @@ public class DbPollerRunnable implements Runnable {
 	    ResultSet resultSet = statement.executeQuery(DbPollerConstants.QUERY_STRING);
 	    while (resultSet.next()) {
 		String id = resultSet.getString(DbPollerConstants.ID_FIELD);
+		String className = resultSet.getString(DbPollerConstants.CLASS_FIELD);
 		String url = resultSet.getString(DbPollerConstants.URL_FIELD);
 		String tag = resultSet.getString(DbPollerConstants.TAG_FIELD);
 		String tagValue = resultSet.getString(DbPollerConstants.TAG_VALUE_FIELD);
 		Event event = new Event(EventConstants.EVENT_GOT_NEW_JOB);
-		event.addParameter(EventConstants.JOB_PARAMETER, new Job(id, url, tag, tagValue));
+		event.addParameter(EventConstants.JOB_PARAMETER, new Job(id, className, url, tag, tagValue));
 		dbPoller.send(event);
 	    }
 	} catch (SQLException e) {
