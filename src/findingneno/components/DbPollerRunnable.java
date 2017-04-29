@@ -30,15 +30,13 @@ public class DbPollerRunnable implements Runnable {
 		String url = resultSet.getString(DbPollerConstants.URL_FIELD);
 		String tag = resultSet.getString(DbPollerConstants.TAG_FIELD);
 		String tagValue = resultSet.getString(DbPollerConstants.TAG_VALUE_FIELD);
-		Event event = new Event(EventConstants.EVENT_GOT_NEW_JOB);
-		event.addParameter(EventConstants.JOB_PARAMETER, new Job(id, className, url, tag, tagValue));
-		dbPoller.send(event);
+		Event requestEvent = EventUtil.makeRequest(EventConstants.EVENT_GOT_NEW_JOB);
+		requestEvent.addParameter(EventConstants.JOB_PARAMETER, new Job(id, className, url, tag, tagValue));
+		dbPoller.send(requestEvent);
 	    }
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
-
     }
-
 }
