@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.apache.http.impl.client.HttpClientBuilder;
+
 import Prism.core.FIFOScheduler;
 import Prism.core.PrismConstants;
 import Prism.core.RRobinDispatcher;
@@ -56,7 +58,8 @@ public class FindingNeno {
 	ExtensibleComponent openJobQueueComponent = StyleFactory.generateComponent(ComponentNames.OPEN_JOB_QUEUE,
 		PrismConstants.C2_COMP, new OpenJobQueue());
 	ExtensibleComponent resultBatchNotifierComponent = StyleFactory.generateComponent(
-		ComponentNames.RESULT_BATCH_NOTIFIER, PrismConstants.C2_COMP, new ResultBatchNotifier());
+		ComponentNames.RESULT_BATCH_NOTIFIER, PrismConstants.C2_COMP,
+		new ResultBatchNotifier(HttpClientBuilder.create().build()));
 
 	dbPollerComponent.scaffold = scaffold;
 	failedJobQueueComponent.scaffold = scaffold;

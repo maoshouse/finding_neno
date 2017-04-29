@@ -2,14 +2,18 @@ package findingneno.Job;
 
 import org.apache.commons.lang3.StringUtils;
 
-import lombok.experimental.Value;
+import lombok.Getter;
 
-@Value
 public class Job {
+    @Getter
     private final String id;
+    @Getter
     private final String className;
+    @Getter
     private final String url;
+    @Getter
     private final String tag;
+    @Getter
     private final String tagValue;
 
     public Job(String id, String className, String url, String tag, String tagValue) {
