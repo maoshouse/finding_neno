@@ -5,11 +5,16 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import Prism.core.AbstractImplementation;
 import Prism.core.Event;
 import findingneno.configuration.Configuration;
 
 public class DbPoller extends AbstractImplementation {
+    private static final Logger logger = LogManager.getLogger(DbPoller.class.getName());
+
     private final Connection connection;
     private ScheduledExecutorService scheduledExecutorService;
 

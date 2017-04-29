@@ -5,12 +5,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import Prism.core.Event;
 import findingneno.Job.Job;
 import findingneno.components.ComponentConstants.DbPollerConstants;
 import findingneno.components.ComponentConstants.EventConstants;
 
 public class DbPollerRunnable implements Runnable {
+    private static final Logger logger = LogManager.getLogger(DbPollerRunnable.class.getName());
+
     private final DbPoller dbPoller;
     private final Connection connection;
 
@@ -35,8 +40,7 @@ public class DbPollerRunnable implements Runnable {
 		dbPoller.send(requestEvent);
 	    }
 	} catch (SQLException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	    logger.error("DB query error: " + e.getMessage());
 	}
     }
 }

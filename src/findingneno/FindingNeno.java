@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import Prism.core.FIFOScheduler;
 import Prism.core.PrismConstants;
@@ -26,6 +28,7 @@ import findingneno.configuration.Configuration;
 import findingneno.configuration.Configuration.Constants;
 
 public class FindingNeno {
+    private static final Logger logger = LogManager.getLogger(FindingNeno.class);
 
     private static Connection makeDbConnection() {
 	Connection connection = null;
@@ -121,6 +124,7 @@ public class FindingNeno {
 
     public static void main(String[] args) {
 	Thread thread = new Thread(makeRunnable());
+	logger.trace("Starting FindingNeno");
 	thread.start();
 	try {
 	    thread.join();
