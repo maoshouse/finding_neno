@@ -26,7 +26,7 @@ public class OpenJobQueue extends AbstractImplementation {
 	    if (openQueue.size() >= Configuration.OpenQueueConfiguration.MAX_QUEUE_SIZE) {
 		while (!openQueue.isEmpty()) {
 		    Job nextJob = openQueue.poll();
-		    Event requestEvent = new Event(EventConstants.EVENT_REQUEST_WORKFLOW);
+		    Event requestEvent = EventUtil.makeRequest(EventConstants.EVENT_REQUEST_WORKFLOW);
 		    requestEvent.addParameter(EventConstants.JOB_PARAMETER, nextJob);
 		    send(requestEvent);
 		}

@@ -28,8 +28,6 @@ public class ResultBatchNotifier extends AbstractImplementation {
 	}
 	Event notificationEvent = null;
 	if (statusCode < 200 || statusCode >= 300) {
-	    // notify initiator that notification failed, log it and try
-	    // initiating again.
 	    notificationEvent = EventUtil.makeNotification(EventConstants.NOTIFICATION_RESULT_NOTIFY_ERROR);
 	} else {
 	    notificationEvent = EventUtil.makeNotification(EventConstants.NOTIFICATION_RESULT_NOTIFY_SUCCESS);

@@ -38,10 +38,10 @@ public class JobWorkflowRunnable implements Runnable {
 	if (webElement != null) {
 	    String currentValue = webElement.getText();
 	    if (StringUtils.equalsIgnoreCase(currentValue, job.getTagValue())) {
-		Event event = EventUtil.makeRequest(EventConstants.REQUEST_VALUE_CHANGED);
-		event.addParameter(EventConstants.JOB_PARAMETER, job);
-		event.addParameter(EventConstants.NEW_VALUE_PARAMETER, currentValue);
-		jobWorkflowInitiator.send(event);
+		Event requestEvent = EventUtil.makeRequest(EventConstants.REQUEST_VALUE_CHANGED);
+		requestEvent.addParameter(EventConstants.JOB_PARAMETER, job);
+		requestEvent.addParameter(EventConstants.NEW_VALUE_PARAMETER, currentValue);
+		jobWorkflowInitiator.send(requestEvent);
 	    }
 	}
 	jBrowserDriver.close();
