@@ -34,7 +34,6 @@ public class ComponentConstants {
 	public static final String EVENT_REQUEST_WORKFLOW = "Request a new Workflow";
 	public static final String REQUEST_VALUE_CHANGED = "Value changed";
 	public static final String NOTIFICATION_RESULT_NOTIFY_ERROR = "Notification: Result notify error";
-	public static final String NOTIFICATION_RESULT_NOTIFY_SUCCESS = "Notification: Result notify success";
 	public static final String NOTIFICATION_RESCHEDULE_JOB = "Notification: Reschedule job";
 	public static final String NOTIFICATION_BLACKLIST_JOB = "Notification: Blacklist job";
     }

@@ -29,8 +29,6 @@ public class ResultBatchNotifier extends AbstractImplementation {
 	Event notificationEvent = null;
 	if (statusCode < 200 || statusCode >= 300) {
 	    notificationEvent = EventUtil.makeNotification(EventConstants.NOTIFICATION_RESULT_NOTIFY_ERROR);
-	} else {
-	    notificationEvent = EventUtil.makeNotification(EventConstants.NOTIFICATION_RESULT_NOTIFY_SUCCESS);
 	}
 	notificationEvent.addParameter(EventConstants.JOB_PARAMETER, job);
 	notificationEvent.addParameter(EventConstants.NEW_VALUE_PARAMETER, value);
