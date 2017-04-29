@@ -6,6 +6,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import Prism.core.AbstractImplementation;
 import Prism.core.Event;
@@ -14,6 +16,8 @@ import findingneno.components.ComponentConstants.EventConstants;
 import findingneno.configuration.Configuration.ResultBatchNotifierConfiguration;
 
 public class ResultBatchNotifier extends AbstractImplementation {
+    private static final Logger logger = LogManager.getLogger(ResultBatchNotifier.class.getName());
+
     private final HttpClient httpClient;
 
     public ResultBatchNotifier(HttpClient httpClient) {
@@ -28,7 +32,7 @@ public class ResultBatchNotifier extends AbstractImplementation {
 	try {
 	    statusCode = sendPostRequest(job, value);
 	} catch (Exception e) {
-	    // handle
+	    logger.error("HttpClient error");
 	}
 
 	if (statusCode < 200 || statusCode >= 300) {
@@ -37,6 +41,7 @@ public class ResultBatchNotifier extends AbstractImplementation {
 	    notificationEvent.addParameter(EventConstants.JOB_PARAMETER, job);
 	    notificationEvent.addParameter(EventConstants.NEW_VALUE_PARAMETER, value);
 	    send(notificationEvent);
+	    logger.info("Notify: Http Post failure, failed to notify");
 	}
     }
 

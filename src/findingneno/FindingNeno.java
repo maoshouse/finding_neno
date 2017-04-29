@@ -124,7 +124,7 @@ public class FindingNeno {
 
     public static void main(String[] args) {
 	Thread thread = new Thread(makeRunnable());
-	logger.trace("Starting FindingNeno");
+	logger.info("Starting FindingNeno");
 	thread.start();
 	try {
 	    thread.join();

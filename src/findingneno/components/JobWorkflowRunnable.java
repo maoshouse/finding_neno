@@ -1,6 +1,8 @@
 package findingneno.components;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 
 import com.machinepublishers.jbrowserdriver.JBrowserDriver;
@@ -12,6 +14,8 @@ import findingneno.Job.Job;
 import findingneno.components.ComponentConstants.EventConstants;
 
 public class JobWorkflowRunnable implements Runnable {
+    private static final Logger logger = LogManager.getLogger(JobWorkflowRunnable.class.getName());
+
     private final JobWorkflowInitiator jobWorkflowInitiator;
     private final Job job;
 
@@ -28,8 +32,10 @@ public class JobWorkflowRunnable implements Runnable {
 
 	WebElement webElement = null;
 	if (StringUtils.isNotEmpty(job.getId())) {
+	    logger.info("Finding element by id");
 	    webElement = jBrowserDriver.findElementById(job.getId());
 	} else if (StringUtils.isNotEmpty(job.getClassName())) {
+	    logger.info("Finding element by class");
 	    webElement = jBrowserDriver.findElementByClassName(job.getClassName());
 	} else {
 	    // maybe think about some combo of tag name and css
@@ -42,7 +48,10 @@ public class JobWorkflowRunnable implements Runnable {
 		requestEvent.addParameter(EventConstants.JOB_PARAMETER, job);
 		requestEvent.addParameter(EventConstants.NEW_VALUE_PARAMETER, currentValue);
 		jobWorkflowInitiator.send(requestEvent);
+		logger.info("Request: Value changed: " + job.getTagValue() + " => " + currentValue);
 	    }
+	} else {
+	    logger.info("Element not found");
 	}
 	jBrowserDriver.close();
     }

@@ -3,6 +3,9 @@ package findingneno.components;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -15,6 +18,8 @@ import findingneno.components.ComponentConstants.EventConstants;
 import findingneno.configuration.Configuration.FailedJobQueueConfiguration;
 
 public class FailedJobQueue extends AbstractImplementation {
+    private static final Logger logger = LogManager.getLogger(FailedJobQueue.class.getName());
+
     private LoadingCache<String, Integer> failedJobsCache;
 
     public FailedJobQueue() {
@@ -40,15 +45,16 @@ public class FailedJobQueue extends AbstractImplementation {
 		if (jobFailures >= FailedJobQueueConfiguration.MAX_JOB_FAIL_COUNT) {
 		    // notify scheduler to stop scheduling this job
 		    notifyEvent = EventUtil.makeNotification(EventConstants.NOTIFICATION_BLACKLIST_JOB);
+		    logger.info("Notify: job failed too many times");
 		} else {
 		    // notify scheduler to reschedule
 		    notifyEvent = EventUtil.makeNotification(EventConstants.NOTIFICATION_RESCHEDULE_JOB);
+		    logger.info("Notify: reschedule job");
 		}
 		notifyEvent.addParameter(EventConstants.JOB_PARAMETER, job);
 		send(notifyEvent);
 	    } catch (ExecutionException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		logger.error("Cache error: " + e.getMessage());
 	    }
 	}
 

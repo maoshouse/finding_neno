@@ -19,7 +19,7 @@ public class FindingNenoRunnable implements Runnable {
 
     @Override
     public void run() {
-	logger.trace("Starting architecture");
+	logger.info("Starting architecture");
 	dispatch.start();
 	architecture.start();
     }
