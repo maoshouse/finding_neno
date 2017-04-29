@@ -12,6 +12,7 @@ import Prism.core.AbstractImplementation;
 import Prism.core.Event;
 import findingneno.Job.Job;
 import findingneno.components.ComponentConstants.EventConstants;
+import findingneno.configuration.Configuration.ResultBatchNotifierConfiguration;
 
 public class ResultBatchNotifier extends AbstractImplementation {
 
@@ -29,14 +30,22 @@ public class ResultBatchNotifier extends AbstractImplementation {
 	if (statusCode < 200 || statusCode >= 300) {
 	    // notify initiator that notification failed, log it and try
 	    // initiating again.
+	    Event notificationEvent = EventUtil.makeNotification(EventConstants.NOTIFICATION_RESULT_NOTIFY_ERROR);
+	    notificationEvent.addParameter(EventConstants.JOB_PARAMETER, job);
+	    notificationEvent.addParameter(EventConstants.NEW_VALUE_PARAMETER, value);
+	    send(notificationEvent);
+	} else {
+	    Event notificationEvent = EventUtil.makeNotification(EventConstants.NOTIFICATION_RESULT_NOTIFY_SUCCESS);
+	    notificationEvent.addParameter(EventConstants.JOB_PARAMETER, job);
+	    notificationEvent.addParameter(EventConstants.NEW_VALUE_PARAMETER, value);
+	    send(notificationEvent);
 	}
     }
 
     public int sendPostRequest(Job job, String value) throws ClientProtocolException, IOException {
 	HttpClient httpClient = HttpClientBuilder.create().build();
-	HttpPost httpPost = new HttpPost("");
-	httpPost.addHeader("User-Agent", "lol");
-
+	HttpPost httpPost = new HttpPost(ResultBatchNotifierConfiguration.POST_URL);
+	// httpPost.addHeader("User-Agent", "lol");
 	HttpResponse httpResponse = httpClient.execute(httpPost);
 	int statusCode = httpResponse.getStatusLine().getStatusCode();
 	return statusCode;

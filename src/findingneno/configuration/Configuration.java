@@ -24,4 +24,7 @@ public class Configuration {
 	public static final int INITIATOR_WORKFLOW_THREADPOOL_SIZE = 5;
     }
 
+    public static class ResultBatchNotifierConfiguration {
+	public static final String POST_URL = "post_url";
+    }
 }
