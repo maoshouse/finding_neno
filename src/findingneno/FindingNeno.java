@@ -33,13 +33,9 @@ public class FindingNeno {
     private static Connection makeDbConnection() {
 	Connection connection = null;
 	try {
-	    Class.forName("org.postgresql.Driver");
-	    connection = DriverManager.getConnection(Configuration.DbPollerConfiguration.POSTGRES_URL,
-		    Configuration.DbPollerConfiguration.POSTGRES_USER,
-		    Configuration.DbPollerConfiguration.POSTGRES_PASSWORD);
-	} catch (ClassNotFoundException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	    // Class.forName("com.mysql.cj.jdbc.Driver");
+	    connection = DriverManager.getConnection(Configuration.DbPollerConfiguration.MYSQL_URL,
+		    Configuration.DbPollerConfiguration.MYSQL_USER, Configuration.DbPollerConfiguration.MYSQL_PASSWORD);
 	} catch (SQLException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();

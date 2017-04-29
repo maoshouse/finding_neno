@@ -36,9 +36,12 @@ public class DbPollerRunnable implements Runnable {
 		String tag = resultSet.getString(DbPollerConstants.TAG_FIELD);
 		String tagValue = resultSet.getString(DbPollerConstants.TAG_VALUE_FIELD);
 		Event requestEvent = EventUtil.makeRequest(EventConstants.EVENT_GOT_NEW_JOB);
-		requestEvent.addParameter(EventConstants.JOB_PARAMETER, new Job(id, className, url, tag, tagValue));
+		Job job = new Job(id, className, url, tag, tagValue);
+		requestEvent.addParameter(EventConstants.JOB_PARAMETER, job);
+		logger.info(job.toString());
 		dbPoller.send(requestEvent);
 	    }
+	    logger.info("Query finished");
 	} catch (SQLException e) {
 	    logger.error("DB query error: " + e.getMessage());
 	}
