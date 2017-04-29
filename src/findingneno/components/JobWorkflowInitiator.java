@@ -21,7 +21,9 @@ public class JobWorkflowInitiator extends AbstractImplementation {
     @Override
     public void handle(Event event) {
 	if (event.eventType == PrismConstants.REPLY) {
-
+	    // initiator doesn't take care of errors and doesnt expect a
+	    // notification.
+	    send(event);
 	} else if (event.eventType == PrismConstants.REQUEST) {
 	    // this was a request from a lower layer
 	    Job job = (Job) event.getParameter(EventConstants.JOB_PARAMETER);

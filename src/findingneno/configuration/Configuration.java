@@ -20,6 +20,12 @@ public class Configuration {
 	public static final int MAX_QUEUE_SIZE = 1;
     }
 
+    public static class FailedJobQueueConfiguration {
+	public static final int MAX_JOB_FAIL_COUNT = 3;
+	public static final long MAX_CACHE_SIZE = 1000L;
+	public static final long CACHE_ENTRY_TTL_MIN = 5L;
+    }
+
     public static class JobWorkflowInitiatorConfiguration {
 	public static final int INITIATOR_WORKFLOW_THREADPOOL_SIZE = 5;
     }

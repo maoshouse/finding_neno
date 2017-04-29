@@ -26,20 +26,17 @@ public class ResultBatchNotifier extends AbstractImplementation {
 	} catch (Exception e) {
 	    // handle
 	}
-
+	Event notificationEvent = null;
 	if (statusCode < 200 || statusCode >= 300) {
 	    // notify initiator that notification failed, log it and try
 	    // initiating again.
-	    Event notificationEvent = EventUtil.makeNotification(EventConstants.NOTIFICATION_RESULT_NOTIFY_ERROR);
-	    notificationEvent.addParameter(EventConstants.JOB_PARAMETER, job);
-	    notificationEvent.addParameter(EventConstants.NEW_VALUE_PARAMETER, value);
-	    send(notificationEvent);
+	    notificationEvent = EventUtil.makeNotification(EventConstants.NOTIFICATION_RESULT_NOTIFY_ERROR);
 	} else {
-	    Event notificationEvent = EventUtil.makeNotification(EventConstants.NOTIFICATION_RESULT_NOTIFY_SUCCESS);
-	    notificationEvent.addParameter(EventConstants.JOB_PARAMETER, job);
-	    notificationEvent.addParameter(EventConstants.NEW_VALUE_PARAMETER, value);
-	    send(notificationEvent);
+	    notificationEvent = EventUtil.makeNotification(EventConstants.NOTIFICATION_RESULT_NOTIFY_SUCCESS);
 	}
+	notificationEvent.addParameter(EventConstants.JOB_PARAMETER, job);
+	notificationEvent.addParameter(EventConstants.NEW_VALUE_PARAMETER, value);
+	send(notificationEvent);
     }
 
     public int sendPostRequest(Job job, String value) throws ClientProtocolException, IOException {

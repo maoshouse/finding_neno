@@ -38,7 +38,7 @@ public class JobWorkflowRunnable implements Runnable {
 	if (webElement != null) {
 	    String currentValue = webElement.getText();
 	    if (StringUtils.equalsIgnoreCase(currentValue, job.getTagValue())) {
-		Event event = new Event(EventConstants.EVENT_VALUE_CHANGED);
+		Event event = EventUtil.makeRequest(EventConstants.REQUEST_VALUE_CHANGED);
 		event.addParameter(EventConstants.JOB_PARAMETER, job);
 		event.addParameter(EventConstants.NEW_VALUE_PARAMETER, currentValue);
 		jobWorkflowInitiator.send(event);
