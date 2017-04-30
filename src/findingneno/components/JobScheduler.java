@@ -23,6 +23,7 @@ public class JobScheduler extends AbstractImplementation {
 
     @Override
     public void handle(Event event) {
+	logger.info("got an event");
 	Job job = (Job) event.getParameter(EventConstants.JOB_PARAMETER);
 	if (event.eventType == PrismConstants.REPLY) {
 	    if (StringUtils.equals(event.name, EventConstants.NOTIFICATION_BLACKLIST_JOB)) {
@@ -30,10 +31,11 @@ public class JobScheduler extends AbstractImplementation {
 		logger.info("Added " + job.toString() + " to blacklist");
 	    } else {
 		sendRequest(job);
+		logger.info("Resubmitted " + job.toString());
 	    }
 	} else if (event.eventType == PrismConstants.REQUEST) {
 	    sendRequest(job);
-	    logger.info("Resubmitted " + job.toString());
+	    logger.info("Submitted " + job.toString());
 	}
     }
 

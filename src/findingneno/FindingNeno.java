@@ -92,16 +92,16 @@ public class FindingNeno {
 	extensibleArchitecture.add(queuesToWorkflowInitiatorConnector);
 	extensibleArchitecture.add(workflowInitiatorToBatchNotifierConnector);
 
-	extensibleArchitecture.weld(dbPollerComponent, dbPollerToJobSchedulerConnector);
-	extensibleArchitecture.weld(dbPollerToJobSchedulerConnector, jobSchedulerComponent);
-	extensibleArchitecture.weld(jobSchedulerComponent, jobSchedulerToQueuesConnector);
-	extensibleArchitecture.weld(jobSchedulerToQueuesConnector, failedJobQueueComponent);
-	extensibleArchitecture.weld(jobSchedulerToQueuesConnector, openJobQueueComponent);
-	extensibleArchitecture.weld(failedJobQueueComponent, queuesToWorkflowInitiatorConnector);
-	extensibleArchitecture.weld(openJobQueueComponent, queuesToWorkflowInitiatorConnector);
-	extensibleArchitecture.weld(queuesToWorkflowInitiatorConnector, jobWorkflowInitiatorComponent);
-	extensibleArchitecture.weld(jobWorkflowInitiatorComponent, workflowInitiatorToBatchNotifierConnector);
-	extensibleArchitecture.weld(workflowInitiatorToBatchNotifierConnector, resultBatchNotifierComponent);
+	extensibleArchitecture.weld(resultBatchNotifierComponent, workflowInitiatorToBatchNotifierConnector);
+	extensibleArchitecture.weld(workflowInitiatorToBatchNotifierConnector, jobWorkflowInitiatorComponent);
+	extensibleArchitecture.weld(jobWorkflowInitiatorComponent, queuesToWorkflowInitiatorConnector);
+	extensibleArchitecture.weld(queuesToWorkflowInitiatorConnector, openJobQueueComponent);
+	extensibleArchitecture.weld(queuesToWorkflowInitiatorConnector, failedJobQueueComponent);
+	extensibleArchitecture.weld(openJobQueueComponent, jobSchedulerToQueuesConnector);
+	extensibleArchitecture.weld(failedJobQueueComponent, jobSchedulerToQueuesConnector);
+	extensibleArchitecture.weld(jobSchedulerToQueuesConnector, jobSchedulerComponent);
+	extensibleArchitecture.weld(jobSchedulerComponent, dbPollerToJobSchedulerConnector);
+	extensibleArchitecture.weld(dbPollerToJobSchedulerConnector, dbPollerComponent);
 
 	return extensibleArchitecture;
     }

@@ -40,7 +40,9 @@ public class FailedJobQueue extends AbstractImplementation {
 	    Job job = (Job) event.getParameter(EventConstants.JOB_PARAMETER);
 	    try {
 		Integer jobFailures = failedJobsCache.get(job.toString());
-		jobFailures++;
+		logger.info(job.toString() + " has failed " + jobFailures + " times");
+		failedJobsCache.put(job.toString(), jobFailures + 1);
+		jobFailures = failedJobsCache.get(job.toString());
 		Event notifyEvent = null;
 		if (jobFailures >= FailedJobQueueConfiguration.MAX_JOB_FAIL_COUNT) {
 		    // notify scheduler to stop scheduling this job

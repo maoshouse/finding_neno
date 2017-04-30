@@ -3,9 +3,6 @@ package findingneno.components;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import Prism.core.AbstractImplementation;
 import Prism.core.Event;
 import Prism.core.PrismConstants;
@@ -14,7 +11,8 @@ import findingneno.components.ComponentConstants.EventConstants;
 import findingneno.configuration.Configuration;
 
 public class JobWorkflowInitiator extends AbstractImplementation {
-    private static final Logger logger = LogManager.getLogger(JobWorkflowInitiator.class.getName());
+    // private static final Logger logger =
+    // LogManager.getLogger(JobWorkflowInitiator.class.getName());
 
     private ExecutorService executorService;
 
