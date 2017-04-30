@@ -45,6 +45,7 @@ public class FailedJobQueue extends AbstractImplementation {
 		jobFailures = failedJobsCache.get(job.toString());
 		Event notifyEvent = null;
 		if (jobFailures >= FailedJobQueueConfiguration.MAX_JOB_FAIL_COUNT) {
+		    failedJobsCache.invalidate(job.toString());
 		    // notify scheduler to stop scheduling this job
 		    notifyEvent = EventUtil.makeNotification(EventConstants.NOTIFICATION_BLACKLIST_JOB);
 		    logger.info("Notify: job failed too many times");
