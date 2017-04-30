@@ -19,11 +19,13 @@ public class ComponentConstants {
 
     public static class DbPollerConstants {
 	public static final String QUERY_STRING = "SELECT * FROM subscriptions";
-	public static final String CLASS_FIELD = "elementclass";
-	public static final String ID_FIELD = "elementid";
+	public static final String SUBSCRIPTION_ID_FIELD = "subscriptionid";
+	public static final String USER_ID_FIELD = "userid";
+	public static final String ELEMENT_CLASS_FIELD = "elementclass";
+	public static final String ELEMENT_ID_FIELD = "elementid";
 	public static final String URL_FIELD = "url";
-	public static final String TAG_FIELD = "elementname";
-	public static final String TAG_VALUE_FIELD = "currentvalue";
+	public static final String ELEMENT_NAME_FIELD = "elementname";
+	public static final String ELEMENT_VALUE_FIELD = "currentvalue";
     }
 
     public static class EventConstants {

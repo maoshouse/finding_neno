@@ -31,6 +31,6 @@ public class Configuration {
     }
 
     public static class ResultBatchNotifierConfiguration {
-	public static final String POST_URL = "http://sample-env-1.cegpykp7aq.us-east-1.elasticbeanstalk.com/";
+	public static final String PUT_URL = "http://sample-env-1.cegpykp7aq.us-east-1.elasticbeanstalk.com/";
     }
 }

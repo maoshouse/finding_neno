@@ -30,13 +30,14 @@ public class DbPollerRunnable implements Runnable {
 	    Statement statement = connection.createStatement();
 	    ResultSet resultSet = statement.executeQuery(DbPollerConstants.QUERY_STRING);
 	    while (resultSet.next()) {
-		String id = resultSet.getString(DbPollerConstants.ID_FIELD);
-		String className = resultSet.getString(DbPollerConstants.CLASS_FIELD);
+		String subscriptionId = resultSet.getString(DbPollerConstants.SUBSCRIPTION_ID_FIELD);
+		String id = resultSet.getString(DbPollerConstants.ELEMENT_ID_FIELD);
+		String className = resultSet.getString(DbPollerConstants.ELEMENT_CLASS_FIELD);
 		String url = resultSet.getString(DbPollerConstants.URL_FIELD);
-		String tag = resultSet.getString(DbPollerConstants.TAG_FIELD);
-		String tagValue = resultSet.getString(DbPollerConstants.TAG_VALUE_FIELD);
+		String tag = resultSet.getString(DbPollerConstants.ELEMENT_NAME_FIELD);
+		String tagValue = resultSet.getString(DbPollerConstants.ELEMENT_VALUE_FIELD);
 		Event requestEvent = EventUtil.makeRequest(EventConstants.EVENT_GOT_NEW_JOB);
-		Job job = new Job(id, className, url, tag, tagValue);
+		Job job = new Job(subscriptionId, id, className, url, tag, tagValue);
 		requestEvent.addParameter(EventConstants.JOB_PARAMETER, job);
 		logger.info(job.toString());
 		dbPoller.send(requestEvent);

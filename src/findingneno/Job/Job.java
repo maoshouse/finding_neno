@@ -6,6 +6,8 @@ import lombok.Getter;
 
 public class Job {
     @Getter
+    private final String subscriptionId;
+    @Getter
     private final String id;
     @Getter
     private final String className;
@@ -16,7 +18,8 @@ public class Job {
     @Getter
     private final String tagValue;
 
-    public Job(String id, String className, String url, String tag, String tagValue) {
+    public Job(String subscriptionId, String id, String className, String url, String tag, String tagValue) {
+	this.subscriptionId = subscriptionId;
 	this.id = id;
 	this.className = className;
 	this.url = url;
