@@ -26,6 +26,7 @@ public class ResultBatchNotifier extends AbstractImplementation {
 
     @Override
     public void handle(Event event) {
+	logger.info("I'm HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERE");
 	Job job = (Job) event.getParameter(EventConstants.JOB_PARAMETER);
 	String value = (String) event.getParameter(EventConstants.NEW_VALUE_PARAMETER);
 	int statusCode = -1;
