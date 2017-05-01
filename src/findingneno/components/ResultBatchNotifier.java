@@ -1,11 +1,16 @@
 package findingneno.components;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -43,13 +48,24 @@ public class ResultBatchNotifier extends AbstractImplementation {
 	    send(notificationEvent);
 	    logger.info("Notify: Http Post failure, failed to notify");
 	}
+
+	if (statusCode == 200) {
+	    logger.debug("put!!");
+	}
     }
 
     private int sendPostRequest(Job job, String value) throws ClientProtocolException, IOException {
-	String putArgs = "subscriptionid=" + job.getSubscriptionId() + "&newValue=" + value;
-	String putUrl = ResultBatchNotifierConfiguration.PUT_URL + "?" + putArgs;
-	HttpPut httpPut = new HttpPut(putUrl);
-	HttpResponse httpResponse = httpClient.execute(httpPut);
+	HttpPost httpPost = new HttpPost(ResultBatchNotifierConfiguration.PUT_URL);
+	ArrayList<NameValuePair> postParameters;
+	postParameters = new ArrayList<NameValuePair>();
+	postParameters.add(new BasicNameValuePair("update", "1"));
+	postParameters.add(new BasicNameValuePair("subscriptionid", job.getSubscriptionId()));
+	postParameters.add(new BasicNameValuePair("newValue", value));
+	httpPost.setEntity(new UrlEncodedFormEntity(postParameters));
+
+	HttpResponse httpResponse = httpClient.execute(httpPost);
+	String responseAsString = EntityUtils.toString(httpResponse.getEntity());
+	logger.debug("Post response: " + responseAsString);
 	int statusCode = httpResponse.getStatusLine().getStatusCode();
 	return statusCode;
     }
