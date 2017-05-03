@@ -38,6 +38,7 @@ public class ComponentConstants {
 	public static final String NOTIFICATION_RESULT_NOTIFY_ERROR = "Notification: Result notify error";
 	public static final String NOTIFICATION_RESCHEDULE_JOB = "Notification: Reschedule job";
 	public static final String NOTIFICATION_BLACKLIST_JOB = "Notification: Blacklist job";
+	public static final String NOTIFICATION_WORKFLOW_FAILURE = "Notification: Workflow failure";
     }
 
 }
