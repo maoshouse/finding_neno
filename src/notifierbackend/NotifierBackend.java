@@ -1,4 +1,4 @@
-package findingneno;
+package notifierbackend;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,19 +16,18 @@ import Prism.extensions.architecture.ExtensibleArchitecture;
 import Prism.extensions.component.ExtensibleComponent;
 import Prism.extensions.connector.ExtensibleConnector;
 import Prism.style.StyleFactory;
-import findingneno.components.ComponentConstants.ComponentNames;
-import findingneno.components.ComponentConstants.ConnectorNames;
-import findingneno.components.DbPoller;
-import findingneno.components.FailedJobQueue;
-import findingneno.components.JobScheduler;
-import findingneno.components.JobWorkflowInitiator;
-import findingneno.components.OpenJobQueue;
-import findingneno.components.Notifier;
-import findingneno.configuration.Configuration;
-import findingneno.configuration.Configuration.Constants;
+import notifierbackend.components.ComponentConstants.ComponentNames;
+import notifierbackend.components.ComponentConstants.ConnectorNames;
+import notifierbackend.components.DbPoller;
+import notifierbackend.components.FailedJobQueue;
+import notifierbackend.components.JobScheduler;
+import notifierbackend.components.JobWorkflowInitiator;
+import notifierbackend.components.Notifier;
+import notifierbackend.components.OpenJobQueue;
+import notifierbackend.configuration.Configuration;
 
-public class FindingNeno {
-    private static final Logger logger = LogManager.getLogger(FindingNeno.class);
+public class NotifierBackend {
+    private static final Logger logger = LogManager.getLogger(NotifierBackend.class);
 
     private static Connection makeDbConnection() {
 	Connection connection = null;
@@ -44,8 +43,8 @@ public class FindingNeno {
     }
 
     public static ExtensibleArchitecture makeArchitecture(Scaffold scaffold) {
-	ExtensibleArchitecture extensibleArchitecture = StyleFactory.generateArchitecture(Constants.ARCHITECTURE_NAME,
-		PrismConstants.C2_ARCH);
+	ExtensibleArchitecture extensibleArchitecture = StyleFactory
+		.generateArchitecture(Configuration.Constants.ARCHITECTURE_NAME, PrismConstants.C2_ARCH);
 	ExtensibleComponent dbPollerComponent = StyleFactory.generateComponent(ComponentNames.DB_POLLER,
 		PrismConstants.C2_COMP, new DbPoller(makeDbConnection()));
 	ExtensibleComponent failedJobQueueComponent = StyleFactory.generateComponent(ComponentNames.FAILED_JOB_QUEUE,
@@ -106,15 +105,16 @@ public class FindingNeno {
 	return extensibleArchitecture;
     }
 
-    public static FindingNenoRunnable makeRunnable() {
-	FIFOScheduler fifoScheduler = new FIFOScheduler(Constants.FIFO_SCEHDULER_SIZE);
-	RRobinDispatcher roundRobinDispatcher = new RRobinDispatcher(fifoScheduler, Constants.DISPATCHER_THREAD_COUNT);
+    public static NotifierBackendRunnable makeRunnable() {
+	FIFOScheduler fifoScheduler = new FIFOScheduler(Configuration.Constants.FIFO_SCEHDULER_SIZE);
+	RRobinDispatcher roundRobinDispatcher = new RRobinDispatcher(fifoScheduler,
+		Configuration.Constants.DISPATCHER_THREAD_COUNT);
 	Scaffold scaffold = new Scaffold();
 	scaffold.scheduler = fifoScheduler;
 	scaffold.dispatcher = roundRobinDispatcher;
 	ExtensibleArchitecture extensibleArchitecture = makeArchitecture(scaffold);
 	extensibleArchitecture.scaffold = scaffold;
-	FindingNenoRunnable findingNenoRunnable = new FindingNenoRunnable(extensibleArchitecture, roundRobinDispatcher);
+	NotifierBackendRunnable findingNenoRunnable = new NotifierBackendRunnable(extensibleArchitecture, roundRobinDispatcher);
 	return findingNenoRunnable;
     }
 

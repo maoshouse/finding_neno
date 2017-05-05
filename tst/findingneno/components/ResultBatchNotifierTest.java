@@ -20,10 +20,11 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
 import Prism.core.Event;
-import findingneno.Job.Job;
-import findingneno.components.ComponentConstants.EventConstants;
-import findingneno.configuration.Configuration.FailedJobQueueConfiguration;
 import lombok.SneakyThrows;
+import notifierbackend.Job.Job;
+import notifierbackend.components.ComponentConstants.EventConstants;
+import notifierbackend.components.Notifier;
+import notifierbackend.configuration.Configuration.FailedJobQueueConfiguration;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ResultBatchNotifierTest {

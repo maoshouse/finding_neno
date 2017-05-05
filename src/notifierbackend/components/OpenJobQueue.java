@@ -1,4 +1,4 @@
-package findingneno.components;
+package notifierbackend.components;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -8,9 +8,9 @@ import org.apache.logging.log4j.Logger;
 import Prism.core.AbstractImplementation;
 import Prism.core.Event;
 import Prism.core.PrismConstants;
-import findingneno.Job.Job;
-import findingneno.components.ComponentConstants.EventConstants;
-import findingneno.configuration.Configuration;
+import notifierbackend.Job.Job;
+import notifierbackend.components.ComponentConstants.EventConstants;
+import notifierbackend.configuration.Configuration;
 
 public class OpenJobQueue extends AbstractImplementation {
     private static final Logger logger = LogManager.getLogger(OpenJobQueue.class.getName());

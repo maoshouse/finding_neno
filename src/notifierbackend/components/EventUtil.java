@@ -1,4 +1,4 @@
-package findingneno.components;
+package notifierbackend.components;
 
 import Prism.core.Event;
 import Prism.core.PrismConstants;

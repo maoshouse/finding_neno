@@ -1,4 +1,4 @@
-package findingneno.components;
+package notifierbackend.components;
 
 public class ComponentConstants {
     public static class ComponentNames {

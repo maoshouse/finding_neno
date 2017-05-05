@@ -1,4 +1,4 @@
-package findingneno.components;
+package notifierbackend.components;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,9 +9,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import Prism.core.Event;
-import findingneno.Job.Job;
-import findingneno.components.ComponentConstants.DbPollerConstants;
-import findingneno.components.ComponentConstants.EventConstants;
+import notifierbackend.Job.Job;
+import notifierbackend.components.ComponentConstants.DbPollerConstants;
+import notifierbackend.components.ComponentConstants.EventConstants;
+import notifierbackend.components.DbPoller;
 
 public class DbPollerRunnable implements Runnable {
     private static final Logger logger = LogManager.getLogger(DbPollerRunnable.class.getName());

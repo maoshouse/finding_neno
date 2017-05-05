@@ -1,4 +1,4 @@
-package findingneno.components;
+package notifierbackend.components;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,9 +16,9 @@ import org.apache.logging.log4j.Logger;
 
 import Prism.core.AbstractImplementation;
 import Prism.core.Event;
-import findingneno.Job.Job;
-import findingneno.components.ComponentConstants.EventConstants;
-import findingneno.configuration.Configuration.ResultBatchNotifierConfiguration;
+import notifierbackend.Job.Job;
+import notifierbackend.components.ComponentConstants.EventConstants;
+import notifierbackend.configuration.Configuration.ResultBatchNotifierConfiguration;
 
 public class Notifier extends AbstractImplementation {
     private static final Logger logger = LogManager.getLogger(Notifier.class.getName());
