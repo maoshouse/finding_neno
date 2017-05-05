@@ -27,7 +27,7 @@ import lombok.SneakyThrows;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ResultBatchNotifierTest {
-    private ResultBatchNotifier resultBatchNotifier;
+    private Notifier resultBatchNotifier;
 
     @Mock
     private HttpClient httpClient;
@@ -44,7 +44,7 @@ public class ResultBatchNotifierTest {
 
     @Before
     public void setUp() {
-	resultBatchNotifier = new ResultBatchNotifier(httpClient);
+	resultBatchNotifier = new Notifier(httpClient);
     }
 
     @Test

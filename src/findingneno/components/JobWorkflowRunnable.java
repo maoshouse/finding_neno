@@ -56,12 +56,12 @@ public class JobWorkflowRunnable implements Runnable {
 	    } else {
 		logger.info("Element not found");
 	    }
-	    jBrowserDriver.close();
+	    // jBrowserDriver.close();
 	} catch (Exception e) {
 	    Event notificationEvent = EventUtil.makeNotification(EventConstants.NOTIFICATION_WORKFLOW_FAILURE);
 	    notificationEvent.addParameter(EventConstants.JOB_PARAMETER, job);
 	    jobWorkflowInitiator.send(notificationEvent);
-	    logger.info("Notify: Jbrowser failure on Job");
+	    logger.info("Notify: Jbrowser failure on Job ");
 	}
     }
 

@@ -23,7 +23,7 @@ import findingneno.components.FailedJobQueue;
 import findingneno.components.JobScheduler;
 import findingneno.components.JobWorkflowInitiator;
 import findingneno.components.OpenJobQueue;
-import findingneno.components.ResultBatchNotifier;
+import findingneno.components.Notifier;
 import findingneno.configuration.Configuration;
 import findingneno.configuration.Configuration.Constants;
 
@@ -58,7 +58,7 @@ public class FindingNeno {
 		PrismConstants.C2_COMP, new OpenJobQueue());
 	ExtensibleComponent resultBatchNotifierComponent = StyleFactory.generateComponent(
 		ComponentNames.RESULT_BATCH_NOTIFIER, PrismConstants.C2_COMP,
-		new ResultBatchNotifier(HttpClientBuilder.create().build()));
+		new Notifier(HttpClientBuilder.create().build()));
 
 	dbPollerComponent.scaffold = scaffold;
 	failedJobQueueComponent.scaffold = scaffold;

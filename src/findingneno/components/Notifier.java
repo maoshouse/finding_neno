@@ -20,12 +20,12 @@ import findingneno.Job.Job;
 import findingneno.components.ComponentConstants.EventConstants;
 import findingneno.configuration.Configuration.ResultBatchNotifierConfiguration;
 
-public class ResultBatchNotifier extends AbstractImplementation {
-    private static final Logger logger = LogManager.getLogger(ResultBatchNotifier.class.getName());
+public class Notifier extends AbstractImplementation {
+    private static final Logger logger = LogManager.getLogger(Notifier.class.getName());
 
     private final HttpClient httpClient;
 
-    public ResultBatchNotifier(HttpClient httpClient) {
+    public Notifier(HttpClient httpClient) {
 	this.httpClient = httpClient;
     }
 
